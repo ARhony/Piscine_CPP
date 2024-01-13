@@ -5,29 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:20:56 by aramon            #+#    #+#             */
-/*   Updated: 2024/01/12 15:20:57 by aramon           ###   ########.fr       */
+/*   Created: 2024/01/13 16:41:20 by aramon            #+#    #+#             */
+/*   Updated: 2024/01/13 16:41:21 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef SHRUBBERYCREATIONFORM_HPP
+#define SHRUBBERYCREATIONFORM_HPP
 
-#include <iostream>
-#include <string>
-#include <stdexcept>
+#include "Form.hpp"
 #include <fstream>
-#include "AForm.hpp"
 
-class ShrubberyCreationForm : public AForm
-{
-	private:
-		std::string	_target;
-	public:
-		ShrubberyCreationForm();
-		ShrubberyCreationForm(std::string target);
-		ShrubberyCreationForm(ShrubberyCreationForm const & src);
-		ShrubberyCreationForm & operator=(ShrubberyCreationForm const & src);
-		~ShrubberyCreationForm();
+class ShrubberyCreationForm : public Form {
 
-		void execute(Bureaucrat const & executor) const;
+private:
+    const std::string   _target;
+
+    ShrubberyCreationForm();
+
+public:
+    ShrubberyCreationForm( const std::string& target );
+    ShrubberyCreationForm( const ShrubberyCreationForm& src );
+    ~ShrubberyCreationForm();
+
+    ShrubberyCreationForm&  operator=( ShrubberyCreationForm& rhs );
+
+    void        execute( const Bureaucrat& executor ) const;
+
 };
+
+#endif // SHRUBBERYCREATIONFORM_HPP

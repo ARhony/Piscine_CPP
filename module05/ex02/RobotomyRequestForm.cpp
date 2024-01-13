@@ -5,53 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:20:22 by aramon            #+#    #+#             */
-/*   Updated: 2024/01/12 15:20:23 by aramon           ###   ########.fr       */
+/*   Created: 2024/01/13 16:40:37 by aramon            #+#    #+#             */
+/*   Updated: 2024/01/13 16:40:38 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", 72, 45)
-{
+RobotomyRequestForm::RobotomyRequestForm(const std::string& target ) : Form("Robotomy Request Form", 72, 45), _target(target) {}
+
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& src ) : Form(src), _target(src._target) {}
+
+RobotomyRequestForm::~RobotomyRequestForm() {}
+
+RobotomyRequestForm&    RobotomyRequestForm::operator=( RobotomyRequestForm& rhs ) {
+    ( void )rhs;
+    return *this;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("RobotomyRequestForm", 72, 45)
-{
-	this->_target = target;
-}
-
-RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const & src) : AForm(src.getName(), src.getRequiredSign(), src.getRequiredExec())
-{
-	this->_target = src._target;
-}
-
-RobotomyRequestForm & RobotomyRequestForm::operator=(RobotomyRequestForm const & src)
-{
-	if (this == &src)
-		return (*this);
-	this->_target = src._target;
-	return (*this);
-}
-
-RobotomyRequestForm::~RobotomyRequestForm()
-{
-}
-
-void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
-{
-	int	i = 0;
-
-	std::cout << "*Drilling noises*" << std::endl;
-	sleep(1);
-	std::cout << "*Drilling noises*" << std::endl;
-	sleep(1);
-	std::cout << "*Drilling noises*" << std::endl;
-	sleep(1);
-	srand(time(NULL));
-	i = rand();
-	if (i % 2 == 0)
-		std::cout << this->_target << " has been robotomized successfully" << std::endl;
-	else
-		std::cout << this->_target << " has not been robotomized successfully" << std::endl;
+void    RobotomyRequestForm::execute(const Bureaucrat& executor) const {
+    if ( executor.getGrade() > this->getGradeToExecute() )
+        throw Form::GradeTooLowException();
+    else {
+        static int  i;
+        if ( i % 2 == 0 )
+            std::cout << "BZZZZZT! " << _target << " has been robotomized!" << std::endl;
+        else
+            std::cout << "Robotomy failed! " << _target << " is still alive." << std::endl;
+        i++;
+    }
 }

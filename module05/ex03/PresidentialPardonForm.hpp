@@ -5,28 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:20:49 by aramon            #+#    #+#             */
-/*   Updated: 2024/01/12 15:20:50 by aramon           ###   ########.fr       */
+/*   Created: 2024/01/13 16:41:12 by aramon            #+#    #+#             */
+/*   Updated: 2024/01/13 16:41:13 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef PRESIDENTIALPARDONFORM_HPP
+#define PRESIDENTIALPARDONFORM_HPP
 
-#include <iostream>
-#include <string>
-#include <stdexcept>
-#include "AForm.hpp"
+#include "Form.hpp"
 
-class PresidentialPardonForm : public AForm
+class PresidentialPardonForm : public Form
 {
-	private:
-		std::string	_target;
-	public:
-		PresidentialPardonForm();
-		PresidentialPardonForm(std::string target);
-		PresidentialPardonForm(PresidentialPardonForm const & src);
-		PresidentialPardonForm & operator=(PresidentialPardonForm const & src);
-		~PresidentialPardonForm();
+private:
+    std::string _target;
 
-		void execute(Bureaucrat const & executor) const;
+    PresidentialPardonForm();
+
+public:
+    PresidentialPardonForm( const std::string& target );
+    PresidentialPardonForm( const PresidentialPardonForm& src );
+    ~PresidentialPardonForm();
+
+    PresidentialPardonForm& operator=( const PresidentialPardonForm& rhs );
+
+    void execute( const Bureaucrat& executor ) const;
 };
+
+#endif // PRESIDENTIALPARDONFORM_HPP

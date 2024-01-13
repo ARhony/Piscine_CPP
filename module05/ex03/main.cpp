@@ -5,58 +5,49 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:20:44 by aramon            #+#    #+#             */
-/*   Updated: 2024/01/12 15:20:45 by aramon           ###   ########.fr       */
+/*   Created: 2024/01/13 16:41:02 by aramon            #+#    #+#             */
+/*   Updated: 2024/01/13 16:41:03 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Form.hpp"
 #include "Bureaucrat.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 #include "Intern.hpp"
 
-int main()
+int main( void )
 {
-	AForm	*shru;
-	AForm	*robo;
-	AForm	*pres;
-	AForm	*form;
-	Intern	*intern = new Intern();
-	Bureaucrat *b = new Bureaucrat("Bob", 1);
-	Bureaucrat *b2 = new Bureaucrat("Bob2", 150);
+    {
+        Intern  someRandomIntern;
+        Form*   rrf;
 
-	shru = intern->makeForm("shrubbery creation", "forest");
-	robo = intern->makeForm("robotomy request", "robot");
-	pres = intern->makeForm("presidential pardon", "president");
-	form = intern->makeForm("nonexistantform", "someone");
+        // rrf = someRandomIntern.makeForm("robotomy", "Bender");
+        rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+        delete rrf;
+    }
 
-	std::cout << *b << std::endl;
-	std::cout << *b2 << std::endl;
-	std::cout << *shru << std::endl;
-	std::cout << *robo << std::endl;
-	std::cout << *pres << std::endl;
+    try {
+        Bureaucrat bureaucrat("ash", 2); // error with 200
+        ShrubberyCreationForm form1("Shrubbery");
+        RobotomyRequestForm form2("Robotomy");
+        PresidentialPardonForm form3("President");
 
-	b->executeForm(*shru);
-	b->signForm(*shru);
-	b->executeForm(*shru);
-	b->signForm(*robo);
-	b->executeForm(*robo);
-	b->signForm(*pres);
-	b->executeForm(*pres);
-
-	b2->signForm(*shru);
-	b2->executeForm(*shru);
-	b2->signForm(*robo);
-	b2->executeForm(*robo);
-	b2->signForm(*pres);
-	b2->executeForm(*pres);
-
-	delete shru;
-	delete robo;
-	delete pres;
-	delete form;
-	delete intern;
-	delete b;
-	delete b2;
+        std::cout << "\n--------------- Form 1 ( Shrubbery ) ---------------" << std::endl;
+        bureaucrat.signForm(form1);
+        bureaucrat.executeForm(form1);
+        std::cout << "\n--------------- Form 2 ( Robotomy ) ---------------" << std::endl;
+        bureaucrat.signForm(form2);
+        bureaucrat.executeForm(form2);
+        bureaucrat.executeForm(form2);
+        bureaucrat.executeForm(form2);
+        bureaucrat.executeForm(form2);
+        std::cout << "\n--------------- Form 3 ( President ) ---------------" << std::endl;
+        bureaucrat.signForm(form3);
+        bureaucrat.executeForm(form3);
+    } catch (std::exception &e) {
+        std::cout << e.what() << std::endl;
+    }
+    return EXIT_SUCCESS;
 }

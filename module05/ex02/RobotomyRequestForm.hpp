@@ -5,28 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:20:24 by aramon            #+#    #+#             */
-/*   Updated: 2024/01/12 15:20:25 by aramon           ###   ########.fr       */
+/*   Created: 2024/01/13 16:40:39 by aramon            #+#    #+#             */
+/*   Updated: 2024/01/13 16:40:40 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef ROBOTOMYREQUESTFORM_HPP
+#define ROBOTOMYREQUESTFORM_HPP
 
-#include <iostream>
-#include "AForm.hpp"
-#include <unistd.h>
-#include <cstdlib>
+#include "Form.hpp"
 
-class RobotomyRequestForm : public AForm
+class RobotomyRequestForm : public Form
 {
-	private:
-		std::string	_target;
-	public:
-		RobotomyRequestForm();
-		RobotomyRequestForm(std::string target);
-		RobotomyRequestForm(RobotomyRequestForm const & src);
-		RobotomyRequestForm & operator=(RobotomyRequestForm const & src);
-		~RobotomyRequestForm();
+private:
+    const std::string   _target;
 
-		void execute(Bureaucrat const & executor) const;
+    RobotomyRequestForm();
+
+public:
+    RobotomyRequestForm( const std::string& target );
+    RobotomyRequestForm( const RobotomyRequestForm& src );
+    ~RobotomyRequestForm();
+
+    RobotomyRequestForm &operator=( RobotomyRequestForm& rhs );
+
+    void        execute( const Bureaucrat& executor ) const;
 };
+
+#endif // ROBOTOMYREQUESTFORM_HPP

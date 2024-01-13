@@ -5,59 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:19:54 by aramon            #+#    #+#             */
-/*   Updated: 2024/01/12 15:19:55 by aramon           ###   ########.fr       */
+/*   Created: 2024/01/13 16:39:06 by aramon            #+#    #+#             */
+/*   Updated: 2024/01/13 16:39:07 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
-int main()
+int main( void )
 {
-	Bureaucrat *alpha = NULL;
-	Bureaucrat *beta = NULL;
-	Bureaucrat *sigma = NULL;
+    try {
+        Bureaucrat bureaucrat("ash", 1);
 
-	try
-	{
-		alpha = new Bureaucrat("alpha", 1);
-		std::cout << *alpha << std::endl;
-		alpha->incrementGrade();
-		std::cout << *alpha << std::endl;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
+        std::cout << bureaucrat << std::endl;
 
-	try
-	{
-		beta = new Bureaucrat("beta", 150);
-		std::cout << *beta << std::endl;
-		beta->incrementGrade();
-		std::cout << *beta << std::endl;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-
-	try
-	{
-		sigma = new Bureaucrat("sigma", 151);
-		std::cout << *sigma << std::endl;
-		sigma->incrementGrade();
-		std::cout << *sigma << std::endl;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-
-	if (alpha)
-		delete alpha;
-	if (beta)
-		delete beta;
-	if (sigma)
-		delete	sigma;
+        bureaucrat.incrementGrade();
+        // bureaucrat.decrementGrade();
+    } catch (Bureaucrat::GradeTooHighException &e) {
+        std::cout << e.what() << std::endl;
+    }
+    return EXIT_SUCCESS;
 }
