@@ -6,7 +6,7 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:27:20 by aramon            #+#    #+#             */
-/*   Updated: 2024/01/12 15:27:21 by aramon           ###   ########.fr       */
+/*   Updated: 2024/01/13 17:58:50 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #define TFLOAT		2
 #define TDOUBLE		3
 #define ERROR		4
-#define NAN			5
+#define _NAN		5
 #define MININF		6
 #define MININFF		8
 #define MAXINF		7
@@ -38,7 +38,10 @@ ScalarConverter::~ScalarConverter()
 
 ScalarConverter & ScalarConverter::operator=(ScalarConverter const & rhs)
 {
-	*this = rhs;
+	if (this != &rhs)
+	{
+		*this = rhs;
+	}
 	return (*this);
 }
 
@@ -155,7 +158,7 @@ void	ScalarConverter::convert(std::string str)
 			_float = 0;
 			_double = 0;
 			break;
-		case NAN:
+		case _NAN:
 			_char = "impossible";
 			_int = 0;
 			_float = 0;

@@ -6,7 +6,7 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:27:31 by aramon            #+#    #+#             */
-/*   Updated: 2024/01/12 15:27:32 by aramon           ###   ########.fr       */
+/*   Updated: 2024/01/13 17:56:53 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ Serializer::Serializer(Serializer const & src)
 
 Serializer & Serializer::operator=(Serializer const & rhs)
 {
-	*this = rhs;
+	if (this != &rhs)
+	{
+		*this = rhs;
+	}
 	return *this;
 }
 
